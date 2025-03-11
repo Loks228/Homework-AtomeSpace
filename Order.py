@@ -16,47 +16,57 @@
 from abc import ABC, abstractmethod
 from datetime import date
 
-class Order(ABC):            
+class Order(ABC):
+
+    def __init__(self, items=None, price = 0.00, percent = 0):
+        self.items = items if items else []
+        if type(self.items) == list:
+            self.items = ", ".join(self.items)
+        self.price_items = price
+        self.data = date.today()
+        self.percent = percent
+
     @abstractmethod
     def getOrder(self):
         pass
 
 
 class ProductOrder(Order):
-    def __init__(self, items=None, price = 0.00, percent = 0):
-        self.items = items if items else []
-        self.price_items = price
-        self.data = date.today()
-        self.percent = percent
-
     def addItems(self, price):
-
-        if type(self.items) == list:
-            self.items = ", ".join(self.items)
-
         if type(price) == list:
-            self.price_items = (self.price_items + sum(price))
+            self.price_items += sum(price)
         else:
-            self.price_items = (self.price_items + price)
-        self.SERVICE_TYPE = None
+            self.price_items += price
+        return self.price_items
 
     def getOrder(self):
         return f" Items: {self.items} , price: {self.price_items + (self.price_items * self.percent) / 100}, data order: {self.data}"
 
 class ServiceOrder(Order):
+    def addItems(self, price):
+        if type(price) == list:
+            self.price_items += sum(price)
+        else:
+            self.price_items += price
+        return self.price_items
+    
     def getOrder(self):
-        pass
-        SERVICE_TYPE = "serviceType"
-        return f" Items: {self.NameItem} {SERVICE_TYPE}, price: {self.Item_Price}, data order: {self.data}"
+        SERVICE_TYPE = "serviceType "
+        return f" Items: {self.items} {SERVICE_TYPE}: {self.percent}%, price: {self.price_items + (self.price_items * self.percent) / 100}, data order: {self.data}"
     
 while True:
         try:
             List_Order = [(input("items: ")) for _ in range(int(input("Number items: ")))]
             List_Price = [int(input("price: ")) for _ in List_Order]
-            client = ProductOrder(List_Order, 0.00, 10)
+            client = ProductOrder(List_Order)
             client.addItems(List_Price)
-            #client.addItems(10)
             print(client.getOrder())
+            
+            ServicePercent = int(input("percent: "))
+            ServiceClient = ServiceOrder(List_Order, 0.00, ServicePercent)
+            ServiceClient.addItems(10)
+            ServiceClient.addItems(50)
+            print(ServiceClient.getOrder())
         except:
             print("ERROR")
             if input("Write 1:  ") == "1":
