@@ -50,8 +50,7 @@ class ServiceOrder(Order):
             self.price_items += price
         return self.price_items
     
-    def getOrder(self):
-        SERVICE_TYPE = "serviceType "
+    def getOrder(self, SERVICE_TYPE: "serviceType"):
         return f" Items: {self.items} {SERVICE_TYPE}: {self.percent}%, price: {self.price_items + (self.price_items * self.percent) / 100}, data order: {self.data}"
     
 while True:
