@@ -1,42 +1,43 @@
-from abc import ABC, abstractmethod
 
-class classInit(ABC):
-    def __init__(self, s = ""):
-        self.r = []
-        self.number = []
-        self.h = []
-        self.s = s
-        
-class TwoList(classInit):
-    def RList(self):
-        for x in self.s:
-            self.r.append(x)
-        return self.r
+s = " gege bbff "  # Входная строка
+r = []  # Список для хранения символов
+number = []
+h = []
 
-class ThreeFilter(classInit):
-    def forenge(self):
-        for i in range(len(self.r)):        
-            if i + 1 < len(self.r):
-                n = self.r[i+1]
-                if r[i] != n:
-                    self.number.append(self.r[i])
-                    self.number.sort()
-        for x in range(len(self.number)): 
-            if x + 1 < len(self.number):
-                n = self.number[x+1]
-                if self.number[x] == n:
-                    del self.number[x]
-        return self.number
+for x in s:
+    r.append(x)
+print(r)
 
-class FourNumber(classInit):
-    def numsum(self):
-        for n in range(len(self.number)):
-            self.h.append(n)
-        return sum(self.h)
-            
+for i in range(len(r)):
+    if i + 1 < len(r) or i == len(r):
+        n = r[i+1]
+        if r[i] != n:
+            number.append(r[i])
+            print(f"to {number}")
+            if r[-1] == n:
+                number.append(r[-1])
+                print(number)
+                
 
+print(f"two {number}")
+# сравнить два списка с начала за условием и выдать результат отфильтрованого
+for x in range(len(number)): 
+    number.sort()
+    print(f"to {x}")
+    if x + 1 < len(number):
+        n = number[x+1]
+        print(f"var - {n}")
+        if number[x] == n:
+            print(f"del {number[x]}")
+            del number[x]
+r.sort()            
+for _ in number:
+    for x in 
+    if _ == 
+print(number)
+# for n in range(len(number)):
+#     if n == 0:        
+#         h.append(1)
+#     h.append(n)
 
-words = TwoList(str(input("Write a set of letters and write as many as possible that do not repeat; ")))
-print(words.RList())
-print(ThreeFilter(words).forenge())
-print(FourNumber(words).numsum())
+# print(sum(h))
