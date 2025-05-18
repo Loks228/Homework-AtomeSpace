@@ -49,60 +49,33 @@
 
 print("New start")
 print("")
-
 try:
     s = str(input("abc - "))  # Входная строка 
 except: 
-    print("123")
-    s = str(input("abc - "))  # Входная строка
-
+    print("Restart")
+    s = str(input("abc - "))  # Входная строка abcbdeafg
 number = []
 h = []
-
 n = -1
 for x in s:
     if x in h:
         n +=1
         if n > len(number):
-            number.append(h.copy())                
+            number.append(h.copy())    
             if n == 2:
                 del number[0]
         pipo = h.index(x)
-        h.pop(pipo)       
+        h = h[pipo+1:]  # Обрезаем список после первого вхождения повторяющегося символа
     h.append(x)
 
 if number == []:
     number.append(h.copy())
-
-
-up = 1-1
 max = 0
 for i in range(len(number)):
-    up += 1
-
     for x in range(len(number[i])):
-        number[i].clear()
-        if x == 0:
-            u = 1
-        elif x > 0:
-            u += 1
-        number[i].append(u)
-        if u > max:
-            max = u
-print(max)
-# u = 1-1    
-#     u += 1
-#     print(f"list-u {u}")
+        if len(number[i]) > max:
+            max = len(number[i])
+            max_str = "".join(number[i])
+            print(F"Най більши строки - (<{max_str}>) = {max}")
+ 
 
-
-        #     h.append(r[n])
-    #     print(f"to {h}")
-        
-    # for i in range(len(r)):
-    #     if i + 1 < len(r) or i == len(r):
-    #         n = r[i+1]
-    #         if r[i] != n:
-    #             number.append(r[i])
-    #             print(f"to {number}")
-    #             if r[-1] == n:
-    #                 number.append(r[-1])
